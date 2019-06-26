@@ -25,9 +25,13 @@
 
 - [Content](#content)
 - [Prerequisites](#prerequisites)
-  - [Windows](#Windows)
+  - [Windows](#windows)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Documentation](#documentation)
+  - [Required arguments](#required-arguments)
+  - [Optional arguments](#optional-arguments)
+- [Disclaimer](#disclaimer)
 - [Authors](#authors)
 - [Contact](#contact)
 - [License](#license)
@@ -40,11 +44,38 @@ Install **Python**: https://www.python.org/downloads/
 
 ## Installation
 
-`git clone "https://github.com/DeBos99/gitbot.git"`
+```
+git clone "https://github.com/DeBos99/gitbot.git"
+cd gitbot
+python install.py
+cd ..
+```
 
 ## Usage
 
-`python main.py <USER>/<REPOSITORY NAME>`
+`python main.py ARGUMENTS`
+
+## Documentation
+
+### Required arguments
+
+| Argument                     | Description                              |
+| :---                         | :---                                     |
+| -r REPO<br>--repository REPO | Sets the repo for the bot to **REPO**. |
+
+### Optional arguments
+
+| Argument                  | Description                                             | Default value               |
+| :---                      | :---                                                    | :---                        |
+| -h<br>--help              | Shows help message.                                     |                             |
+| -t T<br>--threads T       | Sets the number of threads to **T**.                    | 15                          |
+| -p PATH<br>--proxies PATH | Sets the path to the list with the proxies to **PATH**. | Proxies list from internet. |
+| -d<br>--debug             | Enables debug mode.                                     | False.                      |
+| -dd                       | Changes all warnings to errors                          | False.                      |
+
+## Disclaimer
+
+**GitBot** was created for educational purposes and I'm not taking responsibility for any of your actions.
 
 ## Authors
 
