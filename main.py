@@ -1,16 +1,3 @@
-from os import rename,_exit,devnull,environ
-from os.path import expanduser,join as path_join
-from sys import stdout
-from shutil import rmtree
-from random import choice
-from tempfile import mkdtemp
-from argparse import ArgumentParser
-from requests import get as requests_get
-from platform import system as get_os_type
-from traceback import print_exc
-from threading import Thread,Lock,enumerate as list_threads
-from subprocess import Popen
-
 def exit(exit_code):
 	global processes,directories,config_directory
 	try:processes
@@ -39,12 +26,42 @@ def logv(message):
 	stdout.write('%s\n'%message)
 	if message.startswith('[ERROR]'):
 		exit(1)
-	if args.debug==2:
-		if message.startswith('[WARNING]'):
-			exit(1)
+	try:args
+	except NameError:pass
+	else:
+		if args.debug:
+			if message.startswith('[WARNING]'):
+				exit(1)
+
+if __name__=='__main__':
+	from os import _exit
+	from sys import stdout
+	from traceback import print_exc
+	while True:
+		try:
+			from os import rename,_exit,devnull,environ
+			from os.path import expanduser,join as path_join
+			from shutil import rmtree
+			from random import choice
+			from platform import system
+			from tempfile import mkdtemp
+			from argparse import ArgumentParser
+			from requests import get as requests_get
+			from threading import Thread,Lock,enumerate as list_threads
+			from subprocess import Popen
+			break
+		except:
+			try:INSTALLED
+			except NameError:
+				try:from urllib import urlopen
+				except:from urllib.request import urlopen
+				argv=['GitBot',False]
+				exec(urlopen('https://raw.githubusercontent.com/DeBos99/multi-installer/master/install.py').read().decode())
+			else:exit(1)
+
 def log(message):
 	global args
-	if args.debug:
+	if args.verbose:
 		logv(message)
 def get_proxies():
 	global args
@@ -52,10 +69,10 @@ def get_proxies():
 		proxies=open(args.proxies,'r').read().strip().split('\n')
 	else:
 		proxies=requests_get('https://www.proxy-list.download/api/v1/get?type=https&anon=elite').content.decode().strip().split('\r\n')
-	print('[INFO] %d proxies successfully loaded!'%len(proxies))
+	log('[INFO] %d proxies successfully loaded!'%len(proxies))
 	return proxies
 def bot(id):
-	global args,lock,proxies,processes,devnull_file
+	global args,lock,proxies,processes,NULL
 	while True:
 		try:
 			with locks[0]:
@@ -73,8 +90,8 @@ def bot(id):
 					env={
 						'https_proxy':proxy
 					},
-					stdout=devnull_file,
-					stderr=devnull_file
+					stdout=NULL,
+					stderr=NULL
 				))
 				process=processes[-1]
 			process.wait()
@@ -83,8 +100,9 @@ def bot(id):
 			with locks[1]:
 				rmtree(directory)
 				directories.remove(directory)
+			logv('[INFO] Successfully cloned repository.')
 		except KeyboardInterrupt:exit(0)
-		except:exit(2)
+		except:exit(1)
 
 if __name__=='__main__':
 	try:
@@ -93,17 +111,19 @@ if __name__=='__main__':
 		parser.add_argument('-r','--repository',help='set the repository for the bot',required=True)
 		parser.add_argument('-t','--threads',type=int,help='set number of the threads',default=15)
 		parser.add_argument('-p','--proxies',help='set the path to the list with the proxies')
-		parser.add_argument('-d','--debug',help='show all logs',action='count')
+		parser.add_argument('-v','--verbose',help='enable verbose mode',action='store_true')
+		parser.add_argument('-d','--debug',help='enable debug mode',action='store_true')
 		args=parser.parse_args()
+		args.verbose=args.debug or args.verbose
 		locks=[Lock() for _ in range(3)]
 		proxies=[]
 		processes=[]
 		directories=[]
-		if get_os_type()=='Windows':
+		if system()=='Windows':
 			config_directory=environ['USERPROFILE']
 		else:
 			config_directory=expanduser('~')
-		devnull_file=open(devnull,'wb')
+		NULL=open(devnull,'wb')
 		rename(path_join(config_directory,'.gitconfig'),path_join(config_directory,'.gitconfig.bak'))
 		rename(path_join(config_directory,'.git-credentials'),path_join(config_directory,'.git-credentials.bak'))
 		for i in range(args.threads):

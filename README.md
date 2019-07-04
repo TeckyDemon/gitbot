@@ -24,9 +24,6 @@
 ## Content
 
 - [Content](#content)
-- [Prerequisites](#prerequisites)
-  - [Windows](#windows)
-- [Installation](#installation)
 - [Usage](#usage)
 - [Documentation](#documentation)
   - [Required arguments](#required-arguments)
@@ -36,21 +33,6 @@
 - [Contact](#contact)
 - [License](#license)
 
-## Prerequisites
-
-### Windows
-
-Install **Python**: https://www.python.org/downloads/
-
-## Installation
-
-```
-git clone "https://github.com/DeBos99/gitbot.git"
-cd gitbot
-python install.py
-cd ..
-```
-
 ## Usage
 
 `python main.py ARGUMENTS`
@@ -59,8 +41,8 @@ cd ..
 
 ### Required arguments
 
-| Argument                     | Description                              |
-| :---                         | :---                                     |
+| Argument                     | Description                            |
+| :---                         | :---                                   |
 | -r REPO<br>--repository REPO | Sets the repo for the bot to **REPO**. |
 
 ### Optional arguments
@@ -70,8 +52,8 @@ cd ..
 | -h<br>--help              | Shows help message.                                     |                             |
 | -t T<br>--threads T       | Sets the number of threads to **T**.                    | 15                          |
 | -p PATH<br>--proxies PATH | Sets the path to the list with the proxies to **PATH**. | Proxies list from internet. |
+| -v<br>--verbose           | Enables verbose mode.                                   | False.                      |
 | -d<br>--debug             | Enables debug mode.                                     | False.                      |
-| -dd                       | Changes all warnings to errors                          | False.                      |
 
 ## Disclaimer
 
