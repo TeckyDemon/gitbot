@@ -24,6 +24,13 @@
 ## Content
 
 - [Content](#content)
+- [Installation](#installation)
+  - [Windows](#windows)
+  - [Unix](#unix)
+    - [Debian/Ubuntu](#apt)
+    - [Arch Linux/Manjaro](#pacman)
+    - [CentOS](#yum)
+    - [MacOS](#homebrew)
 - [Usage](#usage)
 - [Documentation](#documentation)
   - [Required arguments](#required-arguments)
@@ -32,6 +39,51 @@
 - [Authors](#authors)
 - [Contact](#contact)
 - [License](#license)
+
+## Installation
+
+### Windows
+
+* Install [Git](https://git-scm.com/download/win).
+* Install [Python](https://www.python.org/downloads/).
+* Run following command in the command prompt:
+```
+git clone "https://github.com/DeBos99/gitbot.git"
+```
+
+### Unix
+
+#### <a name="APT">Debian/Ubuntu based
+
+* Run following commands in the terminal:
+```
+sudo apt install git python -y
+git clone "https://github.com/DeBos99/gitbot.git"
+```
+
+#### <a name="Pacman">Arch Linux/Manjaro
+
+* Run following commands in the terminal:
+```
+sudo pacman -S git python --noconfirm
+git clone "https://github.com/DeBos99/gitbot.git"
+```
+
+#### <a name="YUM">CentOS
+
+* Run following commands in the terminal:
+```
+sudo yum install git python -y
+git clone "https://github.com/DeBos99/gitbot.git"
+```
+
+#### <a name="Homebrew">MacOS
+
+* Run following commands in the terminal:
+```
+brew install git python
+git clone "https://github.com/DeBos99/gitbot.git"
+```
 
 ## Usage
 
@@ -42,13 +94,13 @@
 ### Required arguments
 
 | Argument                     | Description                            |
-| :---                         | :---                                   |
+| :--------------------------- | :------------------------------------- |
 | -r REPO<br>--repository REPO | Sets the repo for the bot to **REPO**. |
 
 ### Optional arguments
 
 | Argument                  | Description                                             | Default value               |
-| :---                      | :---                                                    | :---                        |
+| :------------------------ | :------------------------------------------------------ | :-------------------------- |
 | -h<br>--help              | Shows help message.                                     |                             |
 | -t T<br>--threads T       | Sets the number of threads to **T**.                    | 15                          |
 | -p PATH<br>--proxies PATH | Sets the path to the list with the proxies to **PATH**. | Proxies list from internet. |
