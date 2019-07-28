@@ -108,9 +108,9 @@ if __name__=='__main__':
 	try:
 		exit_lock=Lock()
 		parser=ArgumentParser()
-		parser.add_argument('-r','--repository',help='set the repository for the bot',required=True)
-		parser.add_argument('-t','--threads',type=int,help='set number of the threads',default=15)
-		parser.add_argument('-p','--proxies',help='set the path to the list with the proxies')
+		parser.add_argument('-r','--repository',help='set repository',required=True)
+		parser.add_argument('-t','--threads',type=int,help='set number of threads',default=15)
+		parser.add_argument('-p','--proxies',help='set path to file with proxies')
 		parser.add_argument('-v','--verbose',help='enable verbose mode',action='store_true')
 		parser.add_argument('-d','--debug',help='enable debug mode',action='store_true')
 		args=parser.parse_args()
